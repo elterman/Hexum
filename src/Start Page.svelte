@@ -91,12 +91,8 @@
         }
     };
 
-    const onDemo = () => {
-        window.open('https://youtube.com/shorts/FD6-WvNu_7A');
-    };
-
     const onBinge = () => {
-        delete ss.daily;
+        ss.daily = false;
         loadGame();
         onGoToGame();
     };
@@ -110,9 +106,9 @@
 
 <div class="start-page" in:fade={{ duration: 100 }} out:fade={{ duration: 200 }}>
     <div class="content" bind:this={content} style="transform: scale({scale})">
-        <div class='title gradient-bronze gradient-text'>HEXUM</div>
+        <div class='title gradient-gold gradient-text'>HEXUM</div>
         {#if ss.daily}
-            <div class="subtitle gradient-silver gradient-text">daily</div>
+            <div class="subtitle gradient-gold gradient-text">daily</div>
         {/if}
         <Help />
         {#if ss.daily === undefined}
@@ -122,7 +118,6 @@
             </div>
         {:else}
             <div class="buttons">
-                <PromptButton op={{ label: 'Demo', onClick: onDemo }} />
                 <PromptButton op={{ label: ss.cells ? 'Back to Game' : 'Play', onClick: onGoToGame }} />
             </div>
         {/if}
@@ -155,7 +150,7 @@
 
     .subtitle {
         grid-area: 1/1;
-        font-family: Roboto Condensed;
+        font-family: 'Source Sans 3';
         font-size: 24px;
         place-self: end;
         transform: translate(-80%, 100%);

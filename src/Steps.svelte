@@ -40,7 +40,7 @@
         font-size: 25px;
         place-self: center;
         place-items: center;
-        color: var(--bronze);
+        color: var(--gold);
     }
 
     .message {

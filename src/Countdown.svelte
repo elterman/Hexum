@@ -72,7 +72,7 @@
         align-items: center;
         place-self: end center;
         transform: translateY(25px);
-        color: var(--lightblue);
+        color: var(--gold);
         font-family: Poppins;
         font-size: 15px;
     }

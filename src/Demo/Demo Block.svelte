@@ -6,7 +6,7 @@
 
     const { bi } = $props();
     const block = BLOCKS[bi - 1];
-    const id = $derived(`block-${bi}`);
+    const id = $derived(`demo-block-${bi}`);
     const up = bi % 2 === 0;
     const x = DEX_DX * (block.x || 0);
     const y = DEX_DY * (block.y || 0);

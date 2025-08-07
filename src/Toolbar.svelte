@@ -47,8 +47,8 @@
 
 <div class="toolbar">
     <ToolButton id="tb-help" src={Help} onClick={onHelp} />
-    <ToolButton id="tb-surrender" src={Surrender} onClick={onSurrender} disabled={ss.over || ss.surrender || ss.showDictionary} />
-    <ToolButton id="tb-reset-stats" src={ResetStats} onClick={onResetStats} disabled={_stats.plays === 0 || ss.showDictionary} />
+    <ToolButton id="tb-surrender" src={Surrender} onClick={onSurrender} disabled={ss.over || ss.surrender} />
+    <ToolButton id="tb-reset-stats" src={ResetStats} onClick={onResetStats} disabled={_stats.plays === 0} />
     <ToolButton id="tb-sound" src={_sound.on ? SoundOn : SoundOff} onClick={onSound} />
 </div>
 

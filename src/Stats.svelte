@@ -57,6 +57,6 @@
     }
 
     .flow {
-        margin-bottom: -3px;
+        margin-bottom: -2px;
     }
 </style>
