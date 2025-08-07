@@ -36,7 +36,7 @@
         display: grid;
         height: 40px;
         grid-auto-flow: column;
-        font-family: Roboto Condensed;
+        font-family: Trajan;
         font-size: 25px;
         place-self: center;
         place-items: center;

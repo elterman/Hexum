@@ -39,8 +39,8 @@
     .item {
         width: 94%;
         box-sizing: border-box;
-        font-family: Roboto Condensed;
-        font-size: 15px;
+        font-family: 'Source Sans 3';
+        font-size: 17px;
         border-radius: 50vh;
         height: 90%;
         padding: 0 0 2px;
