@@ -29,7 +29,7 @@ export const _sound = $state({
     play: (id, options = {}) => {
         const { rate = 1, volume = 1 } = options;
 
-        if (_sound.on) {
+        if (_sound.sfx) {
             howl.play(id);
             howl.rate(rate);
             howl.volume(volume);

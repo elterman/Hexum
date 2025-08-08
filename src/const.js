@@ -8,6 +8,7 @@ export const CHEER_GREAT = 'great!';
 export const CHEER_EXCELLENT = 'excellent!';
 export const CHEER_PERFECT = 'perfect!';
 export const CHEER_PHENOMENAL = 'phenomenal!';
+export const PROMPT_NO = 'no';
 export const PROMPT_PLAY_AGAIN = 'play again?';
 export const PROMPT_RESET_STATS = 'reset stats?';
 export const PROMPT_SURRENDER = 'give up?';

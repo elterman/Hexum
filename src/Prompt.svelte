@@ -1,5 +1,5 @@
 <script>
-    import { PROMPT_PLAY_AGAIN, PROMPT_RESET_STATS, PROMPT_SURRENDER, X, YOU_GAVE_UP, YOU_GAVE_UP_STATS_RESET } from './const';
+    import { PROMPT_NO, PROMPT_PLAY_AGAIN, PROMPT_RESET_STATS, PROMPT_SURRENDER, YOU_GAVE_UP, YOU_GAVE_UP_STATS_RESET } from './const';
     import PromptPanel from './Prompt Panel.svelte';
     import { calcSolutionTurns, initPoss, isSolved, onOver, onResetStats, onStart } from './shared.svelte';
     import { _prompt, _stats, ss } from './state.svelte';
@@ -62,9 +62,9 @@
                 ]} />
         {/if}
     {:else if label === PROMPT_SURRENDER}
-        <PromptPanel ops={[{ label, onClick: onSurrender }, { label: X }]} />
+        <PromptPanel ops={[{ label, onClick: onSurrender }, { label: PROMPT_NO }]} />
     {:else if label === PROMPT_RESET_STATS}
-        <PromptPanel ops={[{ label, onClick: onResetStats }, { label: X }]} />
+        <PromptPanel ops={[{ label, onClick: onResetStats }, { label: PROMPT_NO }]} />
     {:else if label}
         <PromptPanel ops={[{ label }]} readOnly={cheer} />
     {:else}

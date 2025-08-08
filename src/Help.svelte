@@ -8,7 +8,7 @@
 
     const tap = tapOrClick({ on: true });
     const hi = '<span style=\'color: var(--gold);\'>';
-    const intro = '<span>Twist and turn the grid until each horizontal row totals the sum at the center. Solve in as few steps as possible.</span>';
+    const intro = '<span>Twist and turn the grid until each horizontal row totals the sum at the center of the grid. Solve in as few steps as possible.</span>';
 
     const prompts = [
         `<span>${tap} the ${hi}rightmost</span> cell in a three-letter block to rotate it ${hi}clockwise</span>.`,

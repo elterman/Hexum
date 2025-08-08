@@ -46,6 +46,7 @@
         cursor: pointer;
         font-size: 24px;
         height: 36px;
+        filter: drop-shadow(1px 1px 1px );
     }
 
     .button:hover {

@@ -132,7 +132,6 @@
         display: grid;
         place-content: center;
         z-index: 100;
-        filter: drop-shadow(0 0 5px black);
     }
 
     .content {
@@ -144,6 +143,7 @@
         grid-area: 1/1;
         place-self: center;
         width: calc(min(80%, 300px));
+        filter: drop-shadow(3px 3px 5px black);
     }
 
     .subtitle {
