@@ -281,7 +281,6 @@ export const onStart = (replay = false) => {
     delete ss.over;
     delete ss.cheer;
     delete ss.surrender;
-    delete ss.center;
 
     persist();
 };
@@ -333,6 +332,21 @@ export const isSolved = () => {
     }
 
     return true;
+};
+
+export const sumAt = i => {
+    const words = [
+        wordAt([1, 2, 3]),
+        wordAt([4, 5, 6, 7]),
+        wordAt([8, 9, 10, 11, 12]),
+        wordAt([13, 14, 15, 16]),
+        wordAt([17, 18, 19]),
+    ];
+
+    const word = words[i - 1];
+    const row = word2row(word);
+
+    return rowSum(row);
 };
 
 export const dayOfYear = () => {
@@ -393,10 +407,6 @@ export const calcSolutionTurns = (turns) => {
 };
 
 const charAt = (pos) => {
-    if (pos === 10) {
-        return ss.center || ss.cells[9].ch;
-    }
-
     return ss.cells.find(cell => cell.pos === pos).ch;
 };
 

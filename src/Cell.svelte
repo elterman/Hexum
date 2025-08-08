@@ -4,16 +4,15 @@
     import { decode, onRotateBlock } from './shared.svelte';
     import { _sound } from './sound.svelte';
     import { _prompt, ss } from './state.svelte';
-    import { post } from './utils';
 
     const { home, bi } = $props();
     const cell = $derived(ss.cells[home - 1]);
     const pos = $derived(cell.pos);
-    const center = home === 10;
+    const isCenter = home === 10;
     const evenRow = $derived((pos > 3 && pos < 8) || (pos > 12 && pos < 17));
     const id = $derived(`cell-${home}`);
     const fr = 0.95;
-    const transform = $derived(`rotate(${ss.turns[0] * -60 + (center ? 0 : ss.turns[bi] * -120)}deg)`);
+    const transform = $derived(`rotate(${ss.turns[0] * -60 + (isCenter ? 0 : ss.turns[bi] * -120)}deg)`);
 
     const side = $derived.by(() => {
         if (pos === 1 || pos === 6 || pos === 8 || pos === 11 || pos === 13 || pos === 18) {
@@ -30,12 +29,6 @@
     const onPointerDown = () => {
         _prompt.opacity = 0;
 
-        if (center) {
-            _sound.play('plop');
-            post(() => (ss.keyboard = true));
-            return;
-        }
-
         if (!side) {
             return;
         }
@@ -50,7 +43,7 @@
     };
 
     const disabled = $derived.by(() => {
-        if ((!side && !center) || ss.twist || ss.over || ss.cheer || ss.surrender || ss.flip || ss.keyboard) {
+        if ((!side && !isCenter) || ss.twist || ss.over || ss.cheer || ss.surrender || ss.flip || ss.keyboard) {
             return true;
         }
 
@@ -80,7 +73,8 @@
                 {pos === 'pos' ? cell.pos : pos === 'home' ? home : plus + num}
             </div>
         {/snippet}
-        {#if ss.cells && !center}
+        <!-- {#if ss.cells && !isCenter} -->
+        {#if ss.cells}
             {@render char()}
         {/if}
         {#if ss.debug}

@@ -2,7 +2,7 @@
     import NumberFlow from '@number-flow/svelte';
     import { _stats } from './state.svelte';
 
-    const classes = $derived(`item ${_stats.reset ? 'reset' : ''} gradient-bronze`);
+    const classes = $derived(`item ${_stats.reset ? 'reset' : ''} background-bronze`);
     const ave = $derived(_stats.ave());
 </script>
 

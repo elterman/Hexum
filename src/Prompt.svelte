@@ -9,7 +9,6 @@
 
     const onSurrender = () => {
         ss.surrender = _stats.plays && !ss.replay ? YOU_GAVE_UP_STATS_RESET : YOU_GAVE_UP;
-        ss.center = ss.cells[9].ch;
 
         if (isSolved()) {
             onOver();

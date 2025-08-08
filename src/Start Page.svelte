@@ -29,7 +29,6 @@
     const reloadGame = (job) => {
         ss.cells = job.cells;
         ss.turns = job.turns;
-        ss.center = job.center;
         ss.initial = job.initial;
         ss.steps = job.steps;
         ss.replay = job.replay;

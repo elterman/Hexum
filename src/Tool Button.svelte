@@ -7,7 +7,7 @@
     let scale = $state(1);
     let timer3 = $state(false);
 
-    const classes = $derived([`button-base no-highlight button gradient-${disabled ? 'gray' : 'bronze'}`, { disabled }]);
+    const classes = $derived(['button-base no-highlight button background-silver', { disabled }]);
     const style = $derived(`width: ${width}px; height: ${width}px; transform: scale(${scale})`);
 
     $effect(() => {
@@ -67,6 +67,7 @@
     .disabled {
         cursor: initial;
         pointer-events: none;
+        background: #80808080;
     }
 
     .button:focus {

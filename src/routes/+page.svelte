@@ -52,7 +52,7 @@
         --gold: #ffe4ad;
         --silver: #dfe1e5;
         --bronze: #eeae93;
-        --background: #461a54;
+        --background: #604020;
         --lightblue: #c5e2ff;
     }
 
@@ -106,10 +106,23 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .img-label {
-            font-family: Trajan;
+        .background-gold {
             background-image: url('$lib/images/Gold.webp');
             background-size: cover;
+        }
+
+        .background-silver {
+            background-image: url('$lib/images/Silver.webp');
+            background-size: cover;
+        }
+
+        .background-bronze {
+            background-image: url('$lib/images/Bronze.webp');
+            background-size: cover;
+        }
+
+        .img-label {
+            font-family: Trajan;
         }
     }
 

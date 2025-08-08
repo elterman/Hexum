@@ -1,7 +1,6 @@
 <script>
     import Arrows from './Arrows.svelte';
     import Board from './Board.svelte';
-    import Center from './Center.svelte';
     import { GAME_PAGE } from './const';
     import Countdown from './Countdown.svelte';
     import Keyboard from './Keyboard.svelte';
@@ -9,6 +8,7 @@
     import { ss } from './state.svelte';
     import Stats from './Stats.svelte';
     import Steps from './Steps.svelte';
+    import Sums from './Sums.svelte';
     import Toolbar from './Toolbar.svelte';
 </script>
 
@@ -16,9 +16,8 @@
     <Stats />
     <Steps />
     <Board />
-    <Center />
-    <Keyboard/>
     <Arrows />
+    <Sums/>
     <Countdown />
     <Prompt />
     <Toolbar />
