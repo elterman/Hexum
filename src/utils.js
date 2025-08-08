@@ -68,4 +68,4 @@ export const samePair = (p1, p2) => {
     return false;
 };
 
-export const seq = (n) => [...Array(n + 1).keys()].slice(1);
+export const range = (n) => [...Array(n + 1).keys()].slice(1);

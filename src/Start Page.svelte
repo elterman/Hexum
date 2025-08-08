@@ -8,6 +8,7 @@
     import { _sound } from './sound.svelte';
     import { _stats, ss } from './state.svelte';
     import { focusOnApp, post, windowSize } from './utils';
+    import Hexum from '$lib/images/Hehum.webp';
 
     let content = $state(null);
     let scale = $state(1);
@@ -106,9 +107,9 @@
 
 <div class="start-page" in:fade={{ duration: 100 }} out:fade={{ duration: 200 }}>
     <div class="content" bind:this={content} style="transform: scale({scale})">
-        <div class='title gradient-gold gradient-text'>HEXUM</div>
+        <img class='title' src={Hexum} alt=''/>
         {#if ss.daily}
-            <div class="subtitle gradient-gold gradient-text">daily</div>
+            <div class="subtitle gradient-gold clip-text">daily</div>
         {/if}
         <Help />
         {#if ss.daily === undefined}
@@ -118,7 +119,7 @@
             </div>
         {:else}
             <div class="buttons">
-                <PromptButton op={{ label: ss.cells ? 'Back to Game' : 'Play', onClick: onGoToGame }} />
+                <PromptButton op={{ label: ss.cells ? 'back to game' : 'play', onClick: onGoToGame }} />
             </div>
         {/if}
     </div>
@@ -142,10 +143,7 @@
     .title {
         grid-area: 1/1;
         place-self: center;
-        font-family: Trajan;
-        font-weight: bold;
-        font-size: 64px;
-        margin-bottom: -20px;
+        width: calc(min(80%, 300px));
     }
 
     .subtitle {

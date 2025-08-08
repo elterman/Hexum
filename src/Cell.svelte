@@ -1,7 +1,7 @@
 <script>
     import { fade } from 'svelte/transition';
     import { HEX_DX, HEX_DY } from './const';
-    import { onRotateBlock } from './shared.svelte';
+    import { decode, onRotateBlock } from './shared.svelte';
     import { _sound } from './sound.svelte';
     import { _prompt, ss } from './state.svelte';
     import { post } from './utils';
@@ -62,19 +62,22 @@
     );
 
     const duration = $derived(!ss.seenGamePage ? '0s' : ss.surrender ? '1s' : ss.flip ? '0s' : '0.5s');
+
+    const num = $derived(decode(cell.ch));
+    const plus = $derived(num > 0 ? '+' : '');
 </script>
 
 <div {id} class="cell no-highlight" style="width: {HEX_DX}px; height: {HEX_DY}px;">
     <div
         class={classes}
-        style="width: {HEX_DX * fr}px; height: {HEX_DY * fr}px; font-size: {HEX_DX * 0.45}px;"
+        style="width: {HEX_DX * fr}px; height: {HEX_DY * fr}px; font-size: {HEX_DX * 0.35}px;"
         onpointerdown={onPointerDown}>
         {#snippet char(pos)}
             <div
-                class="char {ss.surrender ? 'surrender' : ''} {pos === 'pos' ? 'pos' : pos === 'home' ? 'home' : ''}"
+                class="char {plus || num === 0 ? '' : 'negative'} {ss.surrender ? 'surrender' : ''} {pos === 'pos' ? 'pos' : pos === 'home' ? 'home' : ''}"
                 style="transform: {transform}; transition-duration: {duration};"
                 transition:fade>
-                {pos === 'pos' ? cell.pos : pos === 'home' ? home : cell.ch}
+                {pos === 'pos' ? cell.pos : pos === 'home' ? home : plus + num}
             </div>
         {/snippet}
         {#if ss.cells && !center}
@@ -164,5 +167,9 @@
         to {
             transform: scale(0.85);
         }
+    }
+
+    .negative {
+        color: #8a0000;
     }
 </style>

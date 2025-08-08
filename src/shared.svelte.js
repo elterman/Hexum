@@ -1,9 +1,6 @@
-import { dict3 } from '$lib/dicts/dict3';
-import { dict4 } from '$lib/dicts/dict4';
-import { dict5 } from '$lib/dicts/dict5';
 import { pool } from '$lib/dicts/pool';
 import { cloneDeep, random, sample } from 'lodash-es';
-import { BLOCKS, CHEER_EXCELLENT, CHEER_GREAT, CHEER_PERFECT, CHEER_PHENOMENAL, CHEER_YOU_DID_IT, PROMPT_PLAY_AGAIN } from './const';
+import { BLOCKS, CHEER_EXCELLENT, CHEER_GREAT, CHEER_PERFECT, CHEER_PHENOMENAL, CHEER_YOU_DID_IT, CYPHER, PROMPT_PLAY_AGAIN, ZERO_AT } from './const';
 import { _sound } from './sound.svelte';
 import { _prompt, _stats, ss } from './state.svelte';
 import { post } from './utils';
@@ -14,6 +11,19 @@ export const initPoss = () => {
     for (let i = 0; i < ss.cells.length; i++) {
         ss.cells[i].pos = i + 1;
     }
+};
+
+export const decode = ch => CYPHER.indexOf(ch) - ZERO_AT;
+
+const rowSum = (row) => row.reduce((sum, n) => sum + n, 0);
+
+const word2row = (word) => word.split('').map(decode);
+
+const isWordSolved = (word) => {
+    const row = word2row(word);
+    const sum = rowSum(row);
+
+    return sum === ss.sum;
 };
 
 export const onOver = () => {
@@ -85,79 +95,53 @@ export const onOver = () => {
 };
 
 const randomPuzzle = () => {
-    const pickWords = () => {
-        let w1, w2, w3, w4, w5;
+    ss.sum = sample([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
-        w1 = sample(dict3);
-        w2 = sample(dict4);
-        w3 = sample(dict5);
-        w4 = sample(dict4.filter(w => w !== w2));
-        w5 = sample(dict3.filter(w => w !== w1));
+    const makeRow = (count) => {
+        let row;
 
-        const chars = ((w1 + w2 + w3 + w4 + w5).split(''));
+        do {
+            row = [];
+
+            for (let i = 0; i < count - 1; i++) {
+                row.push(random(-9, 9));
+            }
+
+            row.push(ss.sum - rowSum(row));
+        } while (row[count - 1] < -9 || row[count - 1] > 9);
+
+        return row;
+    };
+
+    const makeWords = () => {
+        const row1 = makeRow(3);
+        const row2 = makeRow(4);
+        const row3 = makeRow(5);
+        const row4 = makeRow(4);
+        const row5 = makeRow(3);
+
+        const words = [];
+
+        for (let row of [row1, row2, row3, row4, row5]) {
+            row = row.map(n => CYPHER[n + ZERO_AT]);
+            words.push(row.join(''));
+        }
+
+        const chars = ((words[0] + words[1] + words[2] + words[3] + words[4]).split(''));
         ss.cells = [];
 
         for (const [i, ch] of chars.entries()) {
             ss.cells.push({ ch, pos: i + 1 });
         }
 
-        return [w1, w2, w3, w4, w5];
+        return words;
     };
 
-    const MIN_COUNT = 3;
-    let count = 0;
-    let words;
-
-    // have at least MIN_COUNT 3-letter words
-    do {
-        words = pickWords();
-        count = 0;
-
-        for (const [i, b1] of BLOCKS.entries()) {
-            const b2 = i === 5 ? BLOCKS[0] : BLOCKS[i + 1];
-
-            let found = false;
-
-            for (const [j, pos1] of b1.positions.entries()) {
-                const pos2 = j === 2 ? b1.positions[0] : b1.positions[j + 1];
-
-                for (const pos3 of b2.positions) {
-                    const word = ss.cells[pos1 - 1].ch + ss.cells[pos2 - 1].ch + ss.cells[pos3 - 1].ch;
-
-                    if (dict3.includes(word)) {
-                        count += 1;
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (found) {
-                    break;
-                }
-            }
-
-            if (count === MIN_COUNT) {
-                break;
-            }
-        }
-    } while (count < MIN_COUNT);
+    const words = makeWords();
 
     const acceptable = () => {
         if (isSolved(true)) {
             return false;
-        }
-
-        const parrs = [
-            [[1, 2, 3], [3, 7, 12], [12, 16, 19], [19, 18, 17], [17, 13, 8], [8, 4, 1]],
-            [[3, 2, 1], [12, 7, 3], [19, 16, 12], [17, 18, 19], [8, 13, 17], [1, 4, 8]]
-        ];
-
-        for (let i = 0; i < 2; i++) {
-            const parr = parrs[i];
-
-            if (parr.some(poss => wordAt(poss) === words[i ? 4 : 0])) {
-                return false;
-            };
         }
 
         return true;
@@ -331,12 +315,8 @@ export const persist = (statsOnly = false) => {
 
 export const log = (value) => console.log($state.snapshot(value));
 
-export const isSolved = (ignoreCenter = false) => {
+export const isSolved = () => {
     if (!ss.cells) {
-        return false;
-    }
-
-    if (!ignoreCenter && !ss.center) {
         return false;
     }
 
@@ -346,12 +326,10 @@ export const isSolved = (ignoreCenter = false) => {
     const w4 = wordAt([13, 14, 15, 16]);
     const w5 = wordAt([17, 18, 19]);
 
-    if (!dict3.includes(w1) || !dict4.includes(w2) || !dict5.includes(w3) || !dict4.includes(w4) || !dict3.includes(w5)) {
-        return false;
-    }
-
-    if (w1 === w5 || w2 === w4) {
-        return false;
+    for (const word of [w1, w2, w3, w4, w5]) {
+        if (!isWordSolved(word)) {
+            return false;
+        }
     }
 
     return true;

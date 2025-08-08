@@ -97,13 +97,19 @@
         }
 
         .gradient-bronze {
-            background: -webkit-linear-gradient(-90deg, #d2a0a6, #b17682 50%, #8e5c74 100%);
+            background: -webkit-linear-gradient(-90deg, #d7adb2, #c1909a 50%, #a1768a 100%);
         }
 
-        .gradient-text {
+        .clip-text {
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .img-label {
+            font-family: Trajan;
+            background-image: url('$lib/images/Gold.webp');
+            background-size: cover;
         }
     }
 

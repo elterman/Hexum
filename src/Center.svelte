@@ -4,10 +4,8 @@
     import { HEX_DX } from './const';
 </script>
 
-{#if ss.cells && ss.center}
-    {#key ss.center}
-        <div class="char" style="font-size: {HEX_DX * 0.45}px;" transition:fade={{ duration: 200 }}>{ss.center}</div>
-    {/key}
+{#if ss.cells}
+    <div class="char" style="font-size: {HEX_DX * 0.35}px;" transition:fade={{ duration: 200 }}>{ss.sum}</div>
 {/if}
 
 <style>

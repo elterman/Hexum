@@ -14,7 +14,7 @@ export const PROMPT_SURRENDER = 'give up?';
 export const STACK_CAPACITY = 14;
 export const BLUE = '#93d3ee';
 export const YELLOW = '#eedc93';
-export const PURPLE = '#ae93ee';
+export const PURPLE = '#bea8f1';
 export const sqrt3 = Math.sqrt(3);
 export const HEX_DX = 65;
 export const HEX_DY = HEX_DX / sqrt3 * 2;
@@ -23,6 +23,8 @@ export const DEX_DY = DEX_DX / sqrt3 * 2;
 export const YOU_GAVE_UP = 'you gave up.';
 export const YOU_GAVE_UP_STATS_RESET = 'you gave up. stats reset.';
 export const SURRENDER_DURATION = '1s';
+export const CYPHER = 'IHGFEDCBA0123456789]';
+export const ZERO_AT = 9;
 
 export const BLOCKS = [
     { positions: [1, 2, 5], x: 1, y: 0 },
