@@ -152,7 +152,8 @@
     }
 
     .even-row {
-        background: #93eeae;
+        /* background: #93eeae; */
+        background: #adffe4;
     }
 
     @keyframes pulse {

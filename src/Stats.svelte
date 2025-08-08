@@ -53,7 +53,7 @@
     }
 
     .reset {
-        background: #ffff80;
+        background: var(--gold);
     }
 
     .flow {

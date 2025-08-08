@@ -27,6 +27,7 @@
     });
 
     const reloadGame = (job) => {
+        ss.sum = job.sum;
         ss.cells = job.cells;
         ss.turns = job.turns;
         ss.initial = job.initial;

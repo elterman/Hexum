@@ -42,6 +42,6 @@
         transition: opacity 0.3s;
         font-family: Poppins;
         font-weight: bold;
-        color: var(--backgrund);
+        color: var(--background);
     }
 </style>

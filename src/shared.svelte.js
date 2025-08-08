@@ -23,8 +23,7 @@ const isWordSolved = (word) => {
     const row = word2row(word);
     const sum = rowSum(row);
 
-    const target = decode(ss.cells[9].ch);
-    return sum === target;
+    return sum === ss.sum;
 };
 
 export const onOver = () => {
@@ -96,7 +95,7 @@ export const onOver = () => {
 };
 
 const randomPuzzle = () => {
-    const sum = sample([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    ss.sum = sample([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
     const makeRow = (count) => {
         let row;
@@ -105,14 +104,14 @@ const randomPuzzle = () => {
             row = [];
 
             for (let i = 0; i < count - 1; i++) {
-                if (count === 5 && i === 2) {
-                    row.push(sum);
+                if (count === 5 && i == 2) {
+                    row.push(ss.sum);
                 } else {
                     row.push(random(-9, 9));
                 }
             }
 
-            row.push(sum - rowSum(row));
+            row.push(ss.sum - rowSum(row));
         } while (row[count - 1] < -9 || row[count - 1] > 9);
 
         return row;
@@ -247,24 +246,23 @@ const pickDaily = () => {
 };
 
 export const makePuzzle = () => {
-    post(() => {
-        const initial = () => ({ cells: cloneDeep(ss.cells), turns: cloneDeep(ss.turns) });
+    const initial = () => ({ sum: ss.sum, cells: cloneDeep(ss.cells), turns: cloneDeep(ss.turns) });
 
-        if (ss.daily) {
-            pickDaily();
-            ss.initial = initial();
-        } else if (ss.replay) {
-            const { cells, turns } = ss.initial;
-            ss.cells = cloneDeep(cells);
-            ss.turns = cloneDeep(turns);
-        } else {
-            randomPuzzle();
-            ss.initial = initial();
-        }
+    if (ss.daily) {
+        pickDaily();
+        ss.initial = initial();
+    } else if (ss.replay) {
+        const { sum, cells, turns } = ss.initial;
+        ss.sum = sum;
+        ss.cells = cloneDeep(cells);
+        ss.turns = cloneDeep(turns);
+    } else {
+        randomPuzzle();
+        ss.initial = initial();
+    }
 
-        calculatePar();
-        persist();
-    });
+    calculatePar();
+    persist();
 };
 
 export const onStart = (replay = false) => {
@@ -311,7 +309,7 @@ export const onResetStats = () => {
 
 export const persist = (statsOnly = false) => {
     const json = statsOnly ? { ..._stats } : {
-        ..._stats, day: ss.day || 0, cells: ss.cells, turns: ss.turns, center: ss.center, steps: ss.steps, replay: ss.replay, initial: ss.initial,
+        ..._stats, day: ss.day || 0, sum: ss.sum, cells: ss.cells, turns: ss.turns, center: ss.center, steps: ss.steps, replay: ss.replay, initial: ss.initial,
         surrender: ss.surrender, sfx: _sound.sfx, music: _sound.music,
     };
 

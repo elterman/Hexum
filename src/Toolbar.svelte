@@ -1,5 +1,5 @@
 <script>
-    import Help from '$lib/images/Help.webp';
+    import Question from '$lib/images/Question.webp';
     import MusicOff from '$lib/images/Music Off.webp';
     import MusicOn from '$lib/images/Music On.webp';
     import ResetStats from '$lib/images/Reset Stats.webp';
@@ -67,7 +67,7 @@
 </script>
 
 <div class="toolbar">
-    <ToolButton id="tb-help" src={Help} onClick={onHelp} />
+    <ToolButton id="tb-help" src={Question} onClick={onHelp} />
     <ToolButton id="tb-surrender" src={Surrender} onClick={onSurrender} disabled={ss.over || ss.surrender} />
     <ToolButton id="tb-reset-stats" src={ResetStats} onClick={onResetStats} disabled={_stats.plays === 0} />
     <ToolButton id="tb-sound" src={_sound.sfx ? SoundOn : SoundOff} onClick={onSound} />
