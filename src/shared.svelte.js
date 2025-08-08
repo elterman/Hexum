@@ -23,7 +23,8 @@ const isWordSolved = (word) => {
     const row = word2row(word);
     const sum = rowSum(row);
 
-    return sum === ss.sum;
+    const target = decode(ss.cells[9].ch);
+    return sum === target;
 };
 
 export const onOver = () => {
@@ -95,7 +96,7 @@ export const onOver = () => {
 };
 
 const randomPuzzle = () => {
-    ss.sum = sample([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    const sum = sample([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
     const makeRow = (count) => {
         let row;
@@ -104,10 +105,14 @@ const randomPuzzle = () => {
             row = [];
 
             for (let i = 0; i < count - 1; i++) {
-                row.push(random(-9, 9));
+                if (count === 5 && i === 2) {
+                    row.push(sum);
+                } else {
+                    row.push(random(-9, 9));
+                }
             }
 
-            row.push(ss.sum - rowSum(row));
+            row.push(sum - rowSum(row));
         } while (row[count - 1] < -9 || row[count - 1] > 9);
 
         return row;
@@ -137,7 +142,7 @@ const randomPuzzle = () => {
         return words;
     };
 
-    const words = makeWords();
+    makeWords();
 
     const acceptable = () => {
         if (isSolved(true)) {
@@ -306,7 +311,8 @@ export const onResetStats = () => {
 
 export const persist = (statsOnly = false) => {
     const json = statsOnly ? { ..._stats } : {
-        ..._stats, day: ss.day || 0, cells: ss.cells, turns: ss.turns, center: ss.center, steps: ss.steps, replay: ss.replay, initial: ss.initial, surrender: ss.surrender,
+        ..._stats, day: ss.day || 0, cells: ss.cells, turns: ss.turns, center: ss.center, steps: ss.steps, replay: ss.replay, initial: ss.initial,
+        surrender: ss.surrender, sfx: _sound.sfx, music: _sound.music,
     };
 
     localStorage.setItem(ss.appKey(), JSON.stringify(json));
@@ -407,7 +413,7 @@ export const calcSolutionTurns = (turns) => {
 };
 
 const charAt = (pos) => {
-    return ss.cells.find(cell => cell.pos === pos).ch;
+    return ss.cells?.find(cell => cell.pos === pos).ch;
 };
 
 const wordAt = (poss) => poss.reduce((word, pos) => word + charAt(pos), '');

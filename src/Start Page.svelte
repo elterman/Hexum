@@ -55,6 +55,8 @@
             _stats.plays = job.plays;
             _stats.total_score = job.total_score;
             _stats.best = job.best;
+            _sound.sfx = job.sfx;
+            _sound.music = job.music;
 
             if (!ss.daily) {
                 reloadGame(job);

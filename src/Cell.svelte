@@ -147,7 +147,8 @@
 
     .over,
     .pulse {
-        background: #eedc93;
+        /* background: #eedc93; */
+        background: var(--gold);
     }
 
     .even-row {

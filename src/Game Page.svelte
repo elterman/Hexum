@@ -3,7 +3,6 @@
     import Board from './Board.svelte';
     import { GAME_PAGE } from './const';
     import Countdown from './Countdown.svelte';
-    import Keyboard from './Keyboard.svelte';
     import Prompt from './Prompt.svelte';
     import { ss } from './state.svelte';
     import Stats from './Stats.svelte';

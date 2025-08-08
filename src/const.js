@@ -1,5 +1,5 @@
-export const APP_DAILY_STATE = 'Twisted Words Daily V1';
-export const APP_STATE = 'Twisted Words V1';
+export const APP_DAILY_STATE = 'Hexum Daily V1';
+export const APP_STATE = 'Hexum V1';
 export const START_PAGE = 'START PAGE';
 export const GAME_PAGE = 'GAME PAGE';
 export const X = '✖';
@@ -14,7 +14,8 @@ export const PROMPT_RESET_STATS = 'reset stats?';
 export const PROMPT_SURRENDER = 'give up?';
 export const STACK_CAPACITY = 14;
 export const BLUE = '#93d3ee';
-export const YELLOW = '#eedc93';
+// export const YELLOW = '#eedc93';
+export const YELLOW = '#ffe4ad';
 export const PURPLE = '#bea8f1';
 export const sqrt3 = Math.sqrt(3);
 export const HEX_DX = 65;
