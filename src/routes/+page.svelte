@@ -53,6 +53,7 @@
         --silver: #dfe1e5;
         --bronze: #eeae93;
         --background: #461a54;
+        --aqua: #adffe4;
         --lightblue: #c5e2ff;
     }
 

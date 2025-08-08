@@ -1,6 +1,6 @@
 import { pool } from '$lib/dicts/pool';
 import { cloneDeep, random, sample } from 'lodash-es';
-import { BLOCKS, CHEER_EXCELLENT, CHEER_GREAT, CHEER_PERFECT, CHEER_PHENOMENAL, CHEER_YOU_DID_IT, CYPHER, PROMPT_PLAY_AGAIN, ZERO_AT } from './const';
+import { BLOCKS, CHEER_EXCELLENT, CHEER_GREAT, CHEER_PERFECT, CHEER_PHENOMENAL, CHEER_YOU_DID_IT, CYPHER, PROMPT_PLAY_AGAIN, ROWS, ZERO_AT } from './const';
 import { _sound } from './sound.svelte';
 import { _prompt, _stats, ss } from './state.svelte';
 import { post } from './utils';
@@ -323,11 +323,11 @@ export const isSolved = () => {
         return false;
     }
 
-    const w1 = wordAt([1, 2, 3]);
-    const w2 = wordAt([4, 5, 6, 7]);
-    const w3 = wordAt([8, 9, 10, 11, 12]);
-    const w4 = wordAt([13, 14, 15, 16]);
-    const w5 = wordAt([17, 18, 19]);
+    const w1 = wordAt(ROWS[0]);
+    const w2 = wordAt(ROWS[1]);
+    const w3 = wordAt(ROWS[2]);
+    const w4 = wordAt(ROWS[3]);
+    const w5 = wordAt(ROWS[4]);
 
     for (const word of [w1, w2, w3, w4, w5]) {
         if (!isWordSolved(word)) {
@@ -339,15 +339,7 @@ export const isSolved = () => {
 };
 
 export const sumAt = i => {
-    const words = [
-        wordAt([1, 2, 3]),
-        wordAt([4, 5, 6, 7]),
-        wordAt([8, 9, 10, 11, 12]),
-        wordAt([13, 14, 15, 16]),
-        wordAt([17, 18, 19]),
-    ];
-
-    const word = words[i - 1];
+    const word = wordAt(ROWS[i - 1]);
     const row = word2row(word);
 
     return rowSum(row);

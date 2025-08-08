@@ -1,7 +1,7 @@
 <script>
     import { fade } from 'svelte/transition';
     import { HEX_DX, HEX_DY } from './const';
-    import { decode, onRotateBlock } from './shared.svelte';
+    import { decode, log, onRotateBlock } from './shared.svelte';
     import { _sound } from './sound.svelte';
     import { _prompt, ss } from './state.svelte';
 
@@ -43,7 +43,7 @@
     };
 
     const disabled = $derived.by(() => {
-        if ((!side && !isCenter) || ss.twist || ss.over || ss.cheer || ss.surrender || ss.flip || ss.keyboard) {
+        if (isCenter || !side || ss.twist || ss.over || ss.cheer || ss.surrender || ss.flip || ss.keyboard) {
             return true;
         }
 
@@ -51,7 +51,7 @@
     });
 
     const classes = $derived(
-        `hex ${disabled ? 'disabled' : ''} ${ss.flip || ss.cheer ? 'over' : ''} ${ss.over ? 'pulse' : ''} ${(ss.over || ss.flip || ss.cheer) && evenRow ? 'even-row' : ''}`,
+        `hex ${disabled ? 'disabled' : ''} ${cell.blink ? 'blink' : ''} ${ss.flip || ss.cheer ? 'over' : ''} ${ss.over ? 'pulse' : ''} ${(ss.over || ss.flip || ss.cheer) && evenRow ? 'even-row' : ''}`,
     );
 
     const duration = $derived(!ss.seenGamePage ? '0s' : ss.surrender ? '1s' : ss.flip ? '0s' : '0.5s');
@@ -65,21 +65,13 @@
         class={classes}
         style="width: {HEX_DX * fr}px; height: {HEX_DY * fr}px; font-size: {HEX_DX * 0.35}px;"
         onpointerdown={onPointerDown}>
-        {#snippet char(pos)}
+        {#if ss.cells}
             <div
-                class="char {plus || num === 0 ? '' : 'negative'} {ss.surrender ? 'surrender' : ''} {pos === 'pos' ? 'pos' : pos === 'home' ? 'home' : ''}"
+                class="char {plus || num === 0 ? '' : 'negative'} {ss.surrender ? 'surrender' : ''}"
                 style="transform: {transform}; transition-duration: {duration};"
                 transition:fade>
-                {pos === 'pos' ? cell.pos : pos === 'home' ? home : plus + num}
+                {plus + num}
             </div>
-        {/snippet}
-        <!-- {#if ss.cells && !isCenter} -->
-        {#if ss.cells}
-            {@render char()}
-        {/if}
-        {#if ss.debug}
-            {@render char('home')}
-            {@render char('pos')}
         {/if}
     </div>
 </div>
@@ -122,23 +114,12 @@
         transition: transform 0.5s linear;
     }
 
-    .home {
-        margin: -40px 0 0;
-        color: darkorchid;
-    }
-
-    .pos {
-        margin: 0 0 -40px;
-    }
-
-    .pos,
-    .home {
-        font-family: Roboto Condensed;
-        font-size: 12px;
-    }
-
     .surrender {
         transition-delay: 0.5s;
+    }
+
+    .blink {
+        animation: pulse 0.2s alternate 4 ease-in-out;
     }
 
     .pulse {
@@ -147,13 +128,11 @@
 
     .over,
     .pulse {
-        /* background: #eedc93; */
         background: var(--gold);
     }
 
     .even-row {
-        /* background: #93eeae; */
-        background: #adffe4;
+        background: var(--aqua);
     }
 
     @keyframes pulse {

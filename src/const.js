@@ -14,7 +14,6 @@ export const PROMPT_RESET_STATS = 'reset stats?';
 export const PROMPT_SURRENDER = 'give up?';
 export const STACK_CAPACITY = 14;
 export const BLUE = '#93d3ee';
-// export const YELLOW = '#eedc93';
 export const YELLOW = '#ffe4ad';
 export const PURPLE = '#bea8f1';
 export const sqrt3 = Math.sqrt(3);
@@ -35,4 +34,12 @@ export const BLOCKS = [
     { positions: [15, 19, 18], x: 2, y: 2.25 },
     { positions: [13, 14, 17], x: 0.5, y: 2.25 },
     { positions: [4, 9, 8], x: 0, y: 0.75 }
+];
+
+export const ROWS = [
+    [1, 2, 3],
+    [4, 5, 6, 7],
+    [8, 9, 10, 11, 12],
+    [13, 14, 15, 16],
+    [17, 18, 19]
 ];
