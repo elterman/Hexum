@@ -5,7 +5,7 @@
     import { _sound } from './sound.svelte';
     import { _prompt, ss } from './state.svelte';
 
-    const { home, bi } = $props();
+    const { home, bi, color } = $props();
     const cell = $derived(ss.cells[home - 1]);
     const pos = $derived(cell.pos);
     const isCenter = home === 10;
@@ -51,7 +51,7 @@
     });
 
     const classes = $derived(
-        `hex ${disabled ? 'disabled' : ''} ${cell.blink ? 'blink' : ''} ${ss.flip || ss.cheer ? 'over' : ''} ${ss.over ? 'pulse' : ''} ${(ss.over || ss.flip || ss.cheer) && evenRow ? 'even-row' : ''}`,
+        `hex background-${ss.flip || ss.over ? (evenRow ? 'aqua' : 'gold') : color}-radial ${disabled ? 'disabled' : ''} ${cell.blink ? 'blink' : ''} ${ss.over ? 'pulse' : ''}`,
     );
 
     const duration = $derived(!ss.seenGamePage ? '0s' : ss.surrender ? '1s' : ss.flip ? '0s' : '0.5s');
@@ -88,7 +88,7 @@
     .hex {
         grid-area: 1/1;
         clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
-        background: var(--color);
+        /* background: var(--color); */
         transition: background-color 0.1s linear;
         display: grid;
         place-content: center;
@@ -124,15 +124,6 @@
 
     .pulse {
         animation: pulse 0.2s alternate 6 ease-in-out;
-    }
-
-    .over,
-    .pulse {
-        background: var(--gold);
-    }
-
-    .even-row {
-        background: var(--aqua);
     }
 
     @keyframes pulse {

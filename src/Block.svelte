@@ -1,6 +1,6 @@
 <script>
     import Cell from './Cell.svelte';
-    import { BLOCKS, BLUE, HEX_DX, HEX_DY, PURPLE } from './const';
+    import { BLOCKS, HEX_DX, HEX_DY } from './const';
     import { isSolved, onOver, persist } from './shared.svelte';
     import { _sound } from './sound.svelte';
     import { ss } from './state.svelte';
@@ -14,7 +14,7 @@
     const width = `${HEX_DX * 2}px`;
     const height = `${HEX_DY * 1.75}px`;
     const transform = $derived(`translate(${x}px, ${y}px) rotate(${ss.turns[bi] * 120}deg)`);
-    const color = $derived(ss.turns[0] % 2 ? (up ? PURPLE : BLUE) : up ? BLUE : PURPLE);
+    const color = $derived(ss.turns[0] % 2 ? (up ? 'bronze' : 'silver') : up ? 'silver' : 'bronze');
     const duration = $derived(!ss.seenGamePage ? '0s' : ss.surrender ? '1s' : ss.twist ? '0.5s' : '0s');
 
     let style = $derived(
@@ -51,9 +51,9 @@
 
 <div {id} class="block {up ? 'up' : ''} {ss.surrender ? 'surrender' : ''}" {style}>
     {#if ss.cells}
-        <Cell --color={color} --place={`${up ? 'start center' : 'start'}`} home={block.positions[0]} {bi} />
-        <Cell --color={color} --place={`${up ? 'end' : 'start end'}`} home={block.positions[1]} {bi} />
-        <Cell --color={color} --place={`${up ? 'end start' : 'end center'}`} home={block.positions[2]} {bi} />
+        <Cell color={color} --place={`${up ? 'start center' : 'start'}`} home={block.positions[0]} {bi} />
+        <Cell color={color} --place={`${up ? 'end' : 'start end'}`} home={block.positions[1]} {bi} />
+        <Cell color={color} --place={`${up ? 'end start' : 'end center'}`} home={block.positions[2]} {bi} />
     {/if}
 </div>
 

@@ -107,6 +107,26 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .background-aqua-radial {
+            background-image: url('$lib/images/Aqua Radial.webp');
+            background-size: cover;
+        }
+
+        .background-gold-radial {
+            background-image: url('$lib/images/Gold Radial.webp');
+            background-size: cover;
+        }
+
+        .background-silver-radial {
+            background-image: url('$lib/images/Silver Radial.webp');
+            background-size: cover;
+        }
+
+        .background-bronze-radial {
+            background-image: url('$lib/images/Bronze Radial.webp');
+            background-size: cover;
+        }
+
         .background-gold {
             background-image: url('$lib/images/Gold.webp');
             background-size: cover;
