@@ -71,7 +71,7 @@
         grid-auto-flow: column;
         align-items: center;
         place-self: end center;
-        transform: translateY(25px);
+        transform: translateY(30px);
         color: var(--gold);
         font-family: Poppins;
         font-size: 15px;
