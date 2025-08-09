@@ -12,9 +12,10 @@
 
 <style>
     .prompt-panel {
+        place-self: center;
         display: grid;
         grid-auto-flow: column;
-        gap: 30px;
+        gap: 25px;
     }
 
     .read-only {

@@ -31,7 +31,7 @@
 
 <div
     id={op.label}
-    class={['button-base no-highlight button clip-text background-gold img-label', { x }]}
+    class={['button-base no-highlight button clip-text background-gold', { x }]}
     style={`${op.style}; ${style}`}
     onpointerdown={() => (scale = 0.8)}>
     {#if x}
@@ -47,6 +47,7 @@
         font-size: 24px;
         height: 36px;
         filter: drop-shadow(1px 1px 1px );
+        font-family: 'Trajan';
     }
 
     .button:hover {

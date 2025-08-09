@@ -355,7 +355,8 @@ export const dayOfYear = () => {
 
 export const calculatePar = () => {
     const turns = calcSolutionTurns(ss.initial.turns);
-    ss.par = turns.reduce((sum, turns) => sum + Math.abs(turns), 0) + 1;
+    const par = turns.reduce((sum, turns) => sum + Math.abs(turns), 0) + 1;
+    ss.par = Math.min(par, 7);
 };
 
 const calcGridTurns = (gridTurns) => {

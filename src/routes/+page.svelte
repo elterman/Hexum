@@ -121,10 +121,6 @@
             background-image: url('$lib/images/Bronze.webp');
             background-size: cover;
         }
-
-        .img-label {
-            font-family: Trajan;
-        }
     }
 
     .app {

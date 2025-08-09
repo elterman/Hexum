@@ -1,14 +1,14 @@
 <script>
+    import Hexum from '$lib/images/Hehum.webp';
     import { fade } from 'svelte/transition';
     import { GAME_PAGE, YOU_GAVE_UP } from './const';
     import { cleanupDemo } from './Demo/demo shared.svelte';
     import Help from './Help.svelte';
-    import PromptButton from './Prompt Button.svelte';
+    import PromptPanel from './Prompt Panel.svelte';
     import { calculatePar, dayOfYear, isSolved, onStart, persist } from './shared.svelte';
     import { _sound } from './sound.svelte';
     import { _stats, ss } from './state.svelte';
     import { focusOnApp, post, windowSize } from './utils';
-    import Hexum from '$lib/images/Hehum.webp';
 
     let content = $state(null);
     let scale = $state(1);
@@ -119,14 +119,13 @@
         {/if}
         <Help />
         {#if ss.daily === undefined}
-            <div class="buttons">
-                <PromptButton op={{ label: 'daily', onClick: onDaily }} />
-                <PromptButton op={{ label: 'binge', onClick: onBinge }} />
-            </div>
+            <PromptPanel
+                ops={[
+                    { label: 'daily', onClick: onDaily },
+                    { label: 'binge', onClick: onBinge },
+                ]} />
         {:else}
-            <div class="buttons">
-                <PromptButton op={{ label: ss.cells ? 'back to game' : 'play', onClick: onGoToGame }} />
-            </div>
+            <PromptPanel ops={[{ label: ss.cells ? 'back to game' : 'play', onClick: onGoToGame }]} />
         {/if}
     </div>
 </div>
@@ -158,13 +157,5 @@
         font-size: 20px;
         place-self: end center;
         transform: translateY(155%);
-    }
-
-    .buttons {
-        grid-area: 3/1;
-        place-self: center;
-        display: grid;
-        grid-auto-flow: column;
-        gap: 20px;
     }
 </style>
