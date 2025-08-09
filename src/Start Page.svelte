@@ -115,7 +115,7 @@
     <div class="content" bind:this={content} style="transform: scale({scale})">
         <img class="title" src={Hexum} alt="" />
         {#if ss.daily}
-            <div class="subtitle gradient-gold clip-text">daily</div>
+            <div class="subtitle background-gold clip-text">daily</div>
         {/if}
         <Help />
         {#if ss.daily === undefined}
@@ -154,10 +154,10 @@
 
     .subtitle {
         grid-area: 1/1;
-        font-family: 'Source Sans 3';
-        font-size: 24px;
-        place-self: end;
-        transform: translate(-80%, 100%);
+        font-family: Trajan;
+        font-size: 20px;
+        place-self: end center;
+        transform: translateY(155%);
     }
 
     .buttons {
