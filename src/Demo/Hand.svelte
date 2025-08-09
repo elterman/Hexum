@@ -3,7 +3,7 @@
     import { DEX_DX, DEX_DY } from '../const';
     import { ds } from '../state.svelte';
     import { post } from '../utils';
-    import { nextStep, onOver, onRotateBlock, onRotateGrid } from './demo shared.svelte';
+    import { nextStep, onRotateBlock, onRotateGrid } from './demo shared.svelte';
 
     const REACTION_DELAY = 300;
     const NEXT_STEP_DELAY = 2000;
