@@ -146,7 +146,7 @@
     }
 
     @font-face {
-        font-family: Source Sans 3;
+        font-family: 'Source Sans 3';
         src: url('$lib/fonts/Source Sans 3.ttf');
     }
 
