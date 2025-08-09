@@ -40,6 +40,7 @@ export const _sound = $state({
     },
     playMusic: () => {
         if (_sound.music) {
+            _sound.musicPlayed = true;
             loop.play();
         }
     },

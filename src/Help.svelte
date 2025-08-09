@@ -12,7 +12,7 @@
 
     const prompts = [
         `<span>${tap} the ${hi}rightmost</span> cell in a three-number block to rotate it ${hi}clockwise</span>.`,
-        `<span>${tap} the ${hi}leftmost</span> cell in a three-number block to rotate it ${hi}counter-clockwise</span>.`,
+        `<span>${tap} the ${hi}leftmost</span> cell in a block to rotate it ${hi}counter-clockwise</span>.`,
         `<span>${tap} an ${hi}arrow</span> to rotate the ${hi}entire grid</span>.`,
         '<span>Every horizontal row totals +7.</span>',
     ];

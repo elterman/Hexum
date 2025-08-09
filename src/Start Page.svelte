@@ -81,6 +81,10 @@
     };
 
     const onGoToGame = () => {
+        if (!_sound.musicPlayed) {
+            _sound.playMusic();
+        }
+
         cleanupDemo();
 
         ss.page = GAME_PAGE;
@@ -109,7 +113,7 @@
 
 <div class="start-page" in:fade={{ duration: 100 }} out:fade={{ duration: 200 }}>
     <div class="content" bind:this={content} style="transform: scale({scale})">
-        <img class='title' src={Hexum} alt=''/>
+        <img class="title" src={Hexum} alt="" />
         {#if ss.daily}
             <div class="subtitle gradient-gold clip-text">daily</div>
         {/if}

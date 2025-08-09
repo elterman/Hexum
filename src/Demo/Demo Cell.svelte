@@ -129,4 +129,8 @@
             transform: scale(0.85);
         }
     }
+
+    .negative {
+        color: #8a0000;
+    }
 </style>
