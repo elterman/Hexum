@@ -1,6 +1,6 @@
 {
-  "short_name": "Twisted Words",
-  "name": "Twisted Words",
+  "short_name": "Hexum",
+  "name": "Hexum",
   "description": "Rotate blocks of letters to unscramble and reveal five horizontal words.",
   "dir": "ltr",
   "lang": "en",
@@ -458,6 +458,6 @@
   "id": "/",
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#46267b",
-  "background_color": "#46267b"
+  "theme_color": "#461a54",
+  "background_color": "#461a54"
 }
