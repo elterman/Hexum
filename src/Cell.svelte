@@ -51,7 +51,7 @@
     });
 
     const classes = $derived(
-        `hex background-${ss.flip || ss.over ? (evenRow ? 'aqua' : 'gold') : color}-radial ${disabled ? 'disabled' : ''} ${cell.blink ? 'blink' : ''} ${ss.over ? 'pulse' : ''}`,
+        `hex background-${ss.flip || ss.over || ss.cheer ? (evenRow ? 'aqua' : 'gold') : color}-radial ${disabled ? 'disabled' : ''} ${cell.blink ? 'blink' : ''} ${ss.over ? 'pulse' : ''}`,
     );
 
     const duration = $derived(!ss.seenGamePage ? '0s' : ss.surrender ? '1s' : ss.flip ? '0s' : '0.5s');
@@ -89,7 +89,7 @@
         grid-area: 1/1;
         clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
         /* background: var(--color); */
-        transition: background-color 0.1s linear;
+        transition: background-image 0.25s linear;
         display: grid;
         place-content: center;
         pointer-events: visible;

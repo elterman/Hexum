@@ -68,7 +68,7 @@
     .hex {
         grid-area: 1/1;
         clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
-        transition: background-color 0.1s linear;
+        transition: background-image 0.25s linear;
         display: grid;
         place-content: center;
         pointer-events: visible;

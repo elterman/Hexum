@@ -1,11 +1,11 @@
 {
   "workbench.colorCustomizations": /*light*/ {
-    "titleBar.activeBackground": "#ffe4ad",
-    "titleBar.inactiveBackground": "#ffe4ad",
+    "titleBar.activeBackground": "#ffadfa",
+    "titleBar.inactiveBackground": "#ffadfa",
     "sideBar.background": "#F8F8F8",
     "terminal.background": "#F8F8F8"
   },
-  "workbench.colorCustomizations": /*dark*/ {
+  "-workbench.colorCustomizations": /*dark*/ {
     "titleBar.activeBackground": "#461a54",
     "titleBar.inactiveBackground": "#461a54",
     "tab.inactiveBackground": "#461a54A0",
