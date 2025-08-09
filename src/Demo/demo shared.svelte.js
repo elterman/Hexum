@@ -1,7 +1,4 @@
-import { dict3 } from '$lib/dicts/dict3';
-import { dict4 } from '$lib/dicts/dict4';
-import { dict5 } from '$lib/dicts/dict5';
-import { BLOCKS } from '../const';
+import { BLOCKS, CYPHER, ROWS, ZERO_AT } from '../const';
 import { ds } from '../state.svelte';
 import { post } from '../utils';
 
@@ -18,7 +15,6 @@ export const onStart = () => {
     }
 
     delete ds.over;
-    delete ds.center;
 
     post(() => ds.started = true, 100);
 };
@@ -28,11 +24,13 @@ export const nextStep = () => {
 };
 
 export const makePuzzle = () => {
-    const w1 = 'FUN';
-    const w2 = 'WORD';
-    const w3 = 'TWIST';
-    const w4 = 'GAME';
-    const w5 = 'NOW';
+    ds.sum = 7;
+
+    const w1 = '9G5';
+    const w2 = '8CB4';
+    const w3 = 'C079F';
+    const w4 = '29H4';
+    const w5 = '9C1';
 
     const chars = ((w1 + w2 + w3 + w4 + w5).split(''));
     ds.cells = [];
@@ -102,27 +100,33 @@ export const onRotateGrid = (cw) => {
     }
 };
 
-export const isSolved = (ignoreCenter = false) => {
+export const decode = ch => CYPHER.indexOf(ch) - ZERO_AT;
+
+const rowSum = (row) => row.reduce((sum, n) => sum + n, 0);
+
+const word2row = (word) => word.split('').map(decode);
+
+const isWordSolved = (word) => {
+    const row = word2row(word);
+    const sum = rowSum(row);
+
+    return sum === ds.sum;
+};
+export const isSolved = () => {
     if (!ds.cells) {
         return false;
     }
 
-    if (!ignoreCenter && !ds.center) {
-        return false;
-    }
+    const w1 = wordAt(ROWS[0]);
+    const w2 = wordAt(ROWS[1]);
+    const w3 = wordAt(ROWS[2]);
+    const w4 = wordAt(ROWS[3]);
+    const w5 = wordAt(ROWS[4]);
 
-    const w1 = wordAt([1, 2, 3]);
-    const w2 = wordAt([4, 5, 6, 7]);
-    const w3 = wordAt([8, 9, 10, 11, 12]);
-    const w4 = wordAt([13, 14, 15, 16]);
-    const w5 = wordAt([17, 18, 19]);
-
-    if (!dict3.includes(w1) || !dict4.includes(w2) || !dict5.includes(w3) || !dict4.includes(w4) || !dict3.includes(w5)) {
-        return false;
-    }
-
-    if (w1 === w5 || w2 === w4) {
-        return false;
+    for (const word of [w1, w2, w3, w4, w5]) {
+        if (!isWordSolved(word)) {
+            return false;
+        }
     }
 
     return true;
@@ -146,13 +150,7 @@ export const onOver = () => {
     post(() => doOver(), 500);
 };
 
-const charAt = (pos) => {
-    if (pos === 10) {
-        return ds.center || ds.cells[9].ch;
-    }
-
-    return ds.cells.find(cell => cell.pos === pos).ch;
-};
+const charAt = (pos) => ds.cells?.find(cell => cell.pos === pos).ch;
 
 const wordAt = (poss) => poss.reduce((word, pos) => word + charAt(pos), '');
 

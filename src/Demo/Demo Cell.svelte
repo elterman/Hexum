@@ -2,15 +2,16 @@
     import { fade } from 'svelte/transition';
     import { DEX_DX, DEX_DY } from '../const';
     import { ds } from '../state.svelte';
+    import { decode } from '../shared.svelte';
 
     const { home, bi } = $props();
     const cell = $derived(ds.cells[home - 1]);
     const pos = $derived(cell.pos);
-    const center = home === 10;
+    const isCenter = home === 10;
     const evenRow = $derived((pos > 3 && pos < 8) || (pos > 12 && pos < 17));
     const id = $derived(`cell-${home}`);
     const fr = 0.95;
-    const transform = $derived(`rotate(${ds.turns[0] * -60 + (center ? 0 : ds.turns[bi] * -120)}deg)`);
+    const transform = $derived(`rotate(${ds.turns[0] * -60 + (isCenter ? 0 : ds.turns[bi] * -120)}deg)`);
 
     const side = $derived.by(() => {
         if (pos === 1 || pos === 6 || pos === 8 || pos === 11 || pos === 13 || pos === 18) {
@@ -25,7 +26,7 @@
     });
 
     const disabled = $derived.by(() => {
-        if ((!side && !center) || ds.twist || ds.over || ds.flip || ds.keyboard) {
+        if (isCenter || !side || ds.twist || ds.over || ds.flip || ds.keyboard) {
             return true;
         }
 
@@ -37,24 +38,20 @@
     );
 
     const duration = $derived(ds.flip || !ds.started ? '0s' : '0.5s');
+
+    const num = $derived(decode(cell.ch));
+    const plus = $derived(num > 0 ? '+' : '');
 </script>
 
 <div {id} class="cell no-highlight" style="width: {DEX_DX}px; height: {DEX_DY}px;">
-    <div class={classes} style="width: {DEX_DX * fr}px; height: {DEX_DY * fr}px; font-size: {DEX_DX * 0.45}px;">
-        {#snippet char(pos)}
+    <div class={classes} style="width: {DEX_DX * fr}px; height: {DEX_DY * fr}px; font-size: {DEX_DX * 0.35}px;">
+        {#if ds.cells}
             <div
-                class="char {pos === 'pos' ? 'pos' : pos === 'home' ? 'home' : ''}"
+                class="char {plus || num === 0 ? '' : 'negative'} {ds.surrender ? 'surrender' : ''}"
                 style="transform: {transform}; transition-duration: {duration};"
                 transition:fade>
-                {pos === 'pos' ? cell.pos : pos === 'home' ? home : cell.ch}
+                {plus + num}
             </div>
-        {/snippet}
-        {#if ds.cells && !center}
-            {@render char()}
-        {/if}
-        {#if ds.debug}
-            {@render char('home')}
-            {@render char('pos')}
         {/if}
     </div>
 </div>
@@ -117,11 +114,11 @@
 
     .over,
     .pulse {
-        background: #ffff99;
+        background: var(--gold);
     }
 
     .even-row {
-        background: #99df99;
+        background: var(--aqua);
     }
 
     @keyframes pulse {

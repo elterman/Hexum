@@ -79,18 +79,6 @@
                             ds.twist = 'cw';
                             ds.turns[0] += 1;
                             onRotateGrid(true);
-                            post(() => nextStep(), NEXT_STEP_DELAY);
-                        }, REACTION_DELAY);
-                    } else if (ds.step === 4) {
-                        post(() => {
-                            ds.keyboard = true;
-                            post(() => (ds.step = 5), 1000);
-                        }, REACTION_DELAY);
-                    } else if (ds.step === 5) {
-                        post(() => {
-                            delete ds.keyboard;
-                            ds.center = 'I';
-                            onOver();
                             post(() => nextStep(), 500);
                         }, REACTION_DELAY);
                     }

@@ -6,17 +6,15 @@
     import { ds } from './state.svelte';
     import { post, tapOrClick } from './utils';
 
-    const tap = tapOrClick({ on: true });
+    const tap = tapOrClick({ on: false });
     const hi = '<span style=\'color: var(--gold);\'>';
-    const intro = '<span>Twist and turn the grid until each horizontal row totals the number at the center. Solve in as few steps as possible.</span>';
+    const intro = `<span>Twist and turn the grid until each ${hi}horizontal</span> row ${hi}totals</span> the number at the ${hi}center</span>. Solve in as few steps as possible.</span>`;
 
     const prompts = [
-        `<span>${tap} the ${hi}rightmost</span> cell in a three-letter block to rotate it ${hi}clockwise</span>.`,
-        `<span>${tap} the ${hi}leftmost</span> cell in a three-letter block to rotate it ${hi}counter-clockwise</span>.`,
+        `<span>${tap} the ${hi}rightmost</span> cell in a three-number block to rotate it ${hi}clockwise</span>.`,
+        `<span>${tap} the ${hi}leftmost</span> cell in a three-number block to rotate it ${hi}counter-clockwise</span>.`,
         `<span>${tap} an ${hi}arrow</span> to rotate the ${hi}entire grid</span>.`,
-        `<span>${tap} the ${hi}center cell</span> to ${hi}select a letter</span>.`,
-        `<span>${tap} the ${hi}center cell</span> to ${hi}select a letter</span>.`,
-        `<span>The words must read ${hi}from left to right</span>.`,
+        '<span>Every horizontal row totals +7.</span>',
     ];
 
     onMount(() => {
@@ -42,7 +40,7 @@
                 const step = -ds.step + 1;
 
                 if (step === prompts.length) {
-                    post(() => onStart(true), 3000);
+                    post(() => onStart(true), 6000);
                 } else {
                     ds.step = step;
                 }

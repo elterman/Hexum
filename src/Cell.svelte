@@ -1,7 +1,7 @@
 <script>
     import { fade } from 'svelte/transition';
     import { HEX_DX, HEX_DY } from './const';
-    import { decode, log, onRotateBlock } from './shared.svelte';
+    import { decode, onRotateBlock } from './shared.svelte';
     import { _sound } from './sound.svelte';
     import { _prompt, ss } from './state.svelte';
 

@@ -30,7 +30,7 @@
         grid-area: 1/1;
         /* background: #ffffff40; */
         border-radius: 50%;
-        color: #ffffff;
+        color: var(--bronze);
         display: grid;
         place-content: center;
         opacity: 0.65;
