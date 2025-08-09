@@ -216,14 +216,14 @@ export const onRotateGrid = (cw) => {
     }
 };
 
-const makePool = () => {
+export const makePool = () => {
     const pool = [];
 
     for (let i = 0; i < 366; i++) {
         randomPuzzle();
 
         const daily = ss.turns.join('') + ss.cells.map(cell => `${cell.ch}${cell.pos}`).join('•');
-        pool.push(daily);
+        pool.push(ss.sum + daily);
     }
 
     return pool;
@@ -231,7 +231,10 @@ const makePool = () => {
 
 const pickDaily = () => {
     const doy = dayOfYear();
-    const daily = pool[doy - 1];
+    let daily = pool[doy - 1];
+
+    ss.sum = +daily[0];
+    daily = daily.slice(1);
 
     ss.turns = daily.slice(0, 7).split('').map(d => +d);
 
@@ -266,6 +269,8 @@ export const makePuzzle = () => {
 };
 
 export const onStart = (replay = false) => {
+    // makePool();
+
     _sound.play('dice');
     over = false;
 
@@ -289,11 +294,6 @@ export const onStart = (replay = false) => {
 };
 
 export const onResetStats = () => {
-    if (false) {
-        makePool();
-        return;
-    }
-
     if (_stats.plays === 0) {
         return;
     }

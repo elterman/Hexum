@@ -19,13 +19,12 @@
     const width = HEX_DX * 0.6;
 </script>
 
-<div class="sums {_prompt.id ? 'hidden' : ''}">
+<div class="sums {ss.over || _prompt.id ? 'hidden' : ''}">
     {#each [1, 2, 3, 4, 5] as i (i)}
         {@const sum = sumAt(i)}
-        {@const padding = i === 3 ? '4px' : i === 1 || i === 5 ? 0 : '2px'}
         <div
             class="sum no-highlight background-silver"
-            style="width: {width}px; padding: {padding};"
+            style="width: {width}px;"
             onpointerdown={() => onPointerDown(i)}>
             <NumberFlow prefix={sum > 0 ? '+' : ''} value={sum} />
         </div>
@@ -58,6 +57,7 @@
         font-weight: bold;
         color: var(--background);
         cursor: pointer;
+        padding: 2px;
     }
 
     .sum:hover {
