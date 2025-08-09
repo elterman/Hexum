@@ -266,6 +266,11 @@ export const makePuzzle = () => {
 };
 
 export const onStart = (replay = false) => {
+    if (!ss.musicPlayed) {
+        ss.musicPlayed = true;
+        _sound.playMusic();
+    }
+
     _sound.play('dice');
     over = false;
 

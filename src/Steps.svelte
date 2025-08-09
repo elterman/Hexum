@@ -37,7 +37,7 @@
         height: 40px;
         grid-auto-flow: column;
         font-family: Trajan;
-        font-size: 25px;
+        font-size: 22px;
         place-self: center;
         place-items: center;
         color: var(--bronze);
