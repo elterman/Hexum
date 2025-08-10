@@ -1,5 +1,5 @@
 <script>
-    import { DEX_DX, DEX_DY } from '../const';
+    import { DEX_DX, DEX_DY, GOLD } from '../const';
     import { ds } from '../state.svelte';
     import Block from './Demo Block.svelte';
     import Cell from './Demo Cell.svelte';
@@ -45,7 +45,7 @@
             <Block bi={i} />
         {/each}
         {#if ds.cells}
-            <Cell color='gold' --place="center" home={10} />
+            <Cell --color={GOLD} --place="center" home={10} />
         {/if}
     </div>
 </div>

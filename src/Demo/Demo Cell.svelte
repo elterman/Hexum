@@ -34,7 +34,7 @@
     });
 
     const classes = $derived(
-        `hex background-${ds.flip || ds.over ? (evenRow ? 'aqua' : 'gold') : color}-radial ${disabled ? 'disabled' : ''} ${cell.blink ? 'blink' : ''} ${ds.over ? 'pulse' : ''}`,
+        `hex ${ds.flip || ds.over ? (evenRow ? 'aqua' : 'gold') : ''} ${disabled ? 'disabled' : ''} ${cell.blink ? 'blink' : ''} ${ds.over ? 'pulse' : ''}`,
     );
 
     const duration = $derived(ds.flip || !ds.started ? '0s' : '0.5s');
@@ -68,7 +68,8 @@
     .hex {
         grid-area: 1/1;
         clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
-        transition: background-image 0.25s linear;
+        background: var(--color);
+        transition: background-color 0.25s linear;
         display: grid;
         place-content: center;
         pointer-events: visible;
@@ -122,5 +123,13 @@
 
     .negative {
         color: #8a0000;
+    }
+
+    .gold {
+        background: var(--gold);
+    }
+
+    .aqua {
+        background: var(--aqua);
     }
 </style>

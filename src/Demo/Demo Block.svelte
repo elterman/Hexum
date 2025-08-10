@@ -1,5 +1,5 @@
 <script>
-    import { BLOCKS, DEX_DX, DEX_DY } from '../const';
+    import { BLOCKS, BLUE, DEX_DX, DEX_DY, PINK } from '../const';
     import { ds } from '../state.svelte';
     import Cell from './Demo Cell.svelte';
     import { isSolved, onOver } from './demo shared.svelte';
@@ -13,7 +13,7 @@
     const width = `${DEX_DX * 2}px`;
     const height = `${DEX_DY * 1.75}px`;
     const transform = $derived(`translate(${x}px, ${y}px) rotate(${ds.turns[bi] * 120}deg)`);
-    const color = $derived(ds.turns[0] % 2 ? (up ? 'bronze' : 'silver') : up ? 'silver' : 'bronze');
+    const color = $derived(ds.turns[0] % 2 ? (up ? PINK : BLUE) : up ? BLUE : PINK);
     const duration = $derived(ds.twist ? '0.5s' : '0s');
 
     let style = $derived(
@@ -46,9 +46,9 @@
 
 <div {id} class="block {up ? 'up' : ''}" {style}>
     {#if ds.cells}
-        <Cell color={color} --place={`${up ? 'start center' : 'start'}`} home={block.positions[0]} {bi} />
-        <Cell color={color} --place={`${up ? 'end' : 'start end'}`} home={block.positions[1]} {bi} />
-        <Cell color={color} --place={`${up ? 'end start' : 'end center'}`} home={block.positions[2]} {bi} />
+        <Cell --color={color} --place={`${up ? 'start center' : 'start'}`} home={block.positions[0]} {bi} />
+        <Cell --color={color} --place={`${up ? 'end' : 'start end'}`} home={block.positions[1]} {bi} />
+        <Cell --color={color} --place={`${up ? 'end start' : 'end center'}`} home={block.positions[2]} {bi} />
     {/if}
 </div>
 
