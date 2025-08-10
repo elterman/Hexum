@@ -19,13 +19,6 @@ const rowSum = (row) => row.reduce((sum, n) => sum + n, 0);
 
 const word2row = (word) => word.split('').map(decode);
 
-const isWordSolved = (word) => {
-    const row = word2row(word);
-    const sum = rowSum(row);
-
-    return sum === ss.sum;
-};
-
 export const onOver = () => {
     if (over) {
         return;
@@ -143,14 +136,6 @@ const randomPuzzle = () => {
 
     makeWords();
 
-    const acceptable = () => {
-        if (isSolved(true)) {
-            return false;
-        }
-
-        return true;
-    };
-
     do {
         ss.turns = [random(0, 5), random(0, 2), random(0, 2), random(0, 2), random(0, 2), random(0, 2), random(0, 2)];
 
@@ -165,7 +150,7 @@ const randomPuzzle = () => {
                 }
             }
         }
-    } while (!acceptable());
+    } while ([1, 2, 3, 4, 5].some(i => sumAt(i) === ss.sum));
 };
 
 export const onRotateBlock = (bi, cw,) => {
@@ -323,19 +308,7 @@ export const isSolved = () => {
         return false;
     }
 
-    const w1 = wordAt(ROWS[0]);
-    const w2 = wordAt(ROWS[1]);
-    const w3 = wordAt(ROWS[2]);
-    const w4 = wordAt(ROWS[3]);
-    const w5 = wordAt(ROWS[4]);
-
-    for (const word of [w1, w2, w3, w4, w5]) {
-        if (!isWordSolved(word)) {
-            return false;
-        }
-    }
-
-    return true;
+    return [1, 2, 3, 4, 5].every(i => sumAt(i) === ss.sum);
 };
 
 export const sumAt = i => {
