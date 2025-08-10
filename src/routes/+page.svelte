@@ -54,7 +54,9 @@
         --bronze: #eeae93;
         --background: #461a54;
         --aqua: #adffe4;
-        --lightblue: #c5e2ff;
+        --pink: #ffc0cb;
+        --blue: #c0cbff;
+
     }
 
     :global {

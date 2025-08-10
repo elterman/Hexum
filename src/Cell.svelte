@@ -89,7 +89,7 @@
     .hex {
         grid-area: 1/1;
         clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
-        background: pink;
+        background: var(--color);
         transition: background-image 0.25s linear;
         display: grid;
         place-content: center;

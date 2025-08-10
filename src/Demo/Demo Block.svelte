@@ -1,8 +1,8 @@
 <script>
-    import { BLOCKS, BLUE, DEX_DX, DEX_DY, PURPLE } from '../const';
-    import { isSolved, onOver } from './demo shared.svelte';
+    import { BLOCKS, DEX_DX, DEX_DY } from '../const';
     import { ds } from '../state.svelte';
     import Cell from './Demo Cell.svelte';
+    import { isSolved, onOver } from './demo shared.svelte';
 
     const { bi } = $props();
     const block = BLOCKS[bi - 1];

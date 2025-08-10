@@ -1,7 +1,7 @@
 <script>
     import Block from './Block.svelte';
     import Cell from './Cell.svelte';
-    import { HEX_DX, HEX_DY } from './const';
+    import { GOLD, HEX_DX, HEX_DY } from './const';
     import { isSolved, makePuzzle, onOver, persist } from './shared.svelte';
     import { _sound } from './sound.svelte';
     import { ss } from './state.svelte';
@@ -50,7 +50,7 @@
             <Block bi={i} />
         {/each}
         {#if ss.cells}
-            <Cell color='gold' --place="center" home={10} />
+            <Cell --color={GOLD} --place="center" home={10} />
         {/if}
     </div>
 </div>
